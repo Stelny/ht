@@ -10,9 +10,33 @@
         <TextBox x:Name="name"/>
         <TextBox x:Name="surname"/>
         <TextBox x:Name="username"/>
-        <Button Click="addUser">Pridat</Button>
-        <DataGrid x:Name="myDataGrid"></DataGrid>
-        
+        <Button Click="addUser" x:Name="update">Pridat</Button>
+        <Grid>
+            <DataGrid Name="DG1" ItemsSource="{Binding}" AutoGenerateColumns="False" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                    <DataGridTextColumn Header="Surname" Binding="{Binding surname}" />
+                    <!--The Email property contains a URI.  For example "mailto:lucy0@adventure-works.com"-->
+                    <DataGridTextColumn Header="Email" Binding="{Binding username}" />
+                    <!--<DataGridComboBoxColumn Header="Order Status"  SelectedItemBinding="{Binding Status}" />-->
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="EditButton_Click" Tag="{Binding id}">Upravit</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="DeleteButton_Click" Tag="{Binding id}">Odstranit</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
 
     </StackPanel>
 </Window>
